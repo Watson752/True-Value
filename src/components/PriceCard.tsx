@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Progress } from "@/components/ui/progress";
 
 interface Seller {
   name: string;
@@ -17,18 +16,48 @@ interface PriceCardProps {
 export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) => {
   const lowestPrice = Math.min(...sellers.map(s => s.price));
   const highestPrice = Math.max(...sellers.map(s => s.price));
+  const averagePrice = sellers.reduce((acc, s) => acc + s.price, 0) / sellers.length;
   const priceRange = highestPrice - lowestPrice;
 
-  const getPriceIndicator = (price: number) => {
-    if (priceRange === 0) return 50; // If all prices are the same
+  const getPricePosition = (price: number) => {
+    if (priceRange === 0) return 50;
     return ((price - lowestPrice) / priceRange) * 100;
   };
 
-  const getPriceColor = (price: number) => {
-    const percentage = getPriceIndicator(price);
-    if (percentage <= 33) return "#F2FCE2"; // Soft green for good prices
-    if (percentage >= 66) return "#ea384c"; // Red for expensive prices
-    return "#FFE5A3"; // Yellow for middle range
+  const renderPriceBar = (price: number) => {
+    const position = getPricePosition(price);
+    
+    return (
+      <div className="relative w-full h-8 mt-4">
+        {/* Gradient bar */}
+        <div 
+          className="absolute w-full h-2 rounded-full"
+          style={{
+            background: "linear-gradient(to right, #F2FCE2, #FFE5A3, #ea384c)"
+          }}
+        />
+        
+        {/* Average price line */}
+        <div 
+          className="absolute w-0.5 h-4 bg-gray-800"
+          style={{
+            left: `${getPricePosition(averagePrice)}%`,
+            transform: 'translateX(-50%)',
+          }}
+        />
+        
+        {/* Price indicator popup */}
+        <div 
+          className="absolute -top-8 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg border border-gray-200"
+          style={{
+            left: `${position}%`,
+          }}
+        >
+          <span className="font-medium">${price.toFixed(2)}</span>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white border-r border-b border-gray-200"></div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -85,7 +114,7 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
                   </a>
                 </div>
               </div>
-              <div className="w-full h-2 rounded-full" style={{ backgroundColor: getPriceColor(seller.price) }} />
+              {renderPriceBar(seller.price)}
             </motion.div>
           ))}
         </div>
