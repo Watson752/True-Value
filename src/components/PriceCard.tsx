@@ -33,7 +33,7 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
         <div 
           className="absolute w-full h-2 rounded-full"
           style={{
-            background: "linear-gradient(to right, #F2FCE2, #FFE5A3, #ea384c)"
+            background: "linear-gradient(to right, #4ade80, #fbbf24, #ef4444)"
           }}
         />
         
