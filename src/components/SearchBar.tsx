@@ -13,14 +13,14 @@ export const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) =
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto p-2 shadow-lg border border-input/50">
+    <Card className="w-full max-w-2xl mx-auto p-2 shadow-lg border border-input/50 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
       <form onSubmit={handleSubmit} className="relative flex items-center">
         <Input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search for a product..."
-          className="w-full h-12 pl-4 pr-12 text-lg bg-background border-none focus-visible:ring-1 focus-visible:ring-primary/30"
+          className="w-full h-12 pl-4 pr-12 text-lg bg-transparent border-none focus-visible:ring-1 focus-visible:ring-primary/30"
         />
         <Button
           type="submit"

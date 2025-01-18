@@ -24,7 +24,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FF6B6B",
+          DEFAULT: "#8B5CF6",
           foreground: "#FFFFFF",
         },
         secondary: {
@@ -36,8 +36,8 @@ export default {
           foreground: "#6B7280",
         },
         accent: {
-          DEFAULT: "#E9ECEF",
-          foreground: "#1A1A1A",
+          DEFAULT: "#D946EF",
+          foreground: "#FFFFFF",
         },
       },
       borderRadius: {

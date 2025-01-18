@@ -29,7 +29,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
       <Card className="container mx-auto px-4 py-16 border-none shadow-none bg-transparent">
         <CardContent className="p-0">
           <motion.div
@@ -37,7 +37,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/60">
+            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary/60">
               Find the Best Price
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -49,11 +49,23 @@ const Index = () => {
             <SearchBar onSearch={handleSearch} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
             {searchResults.map((result, index) => (
-              <PriceCard key={index} {...result} />
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <PriceCard {...result} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </CardContent>
       </Card>
     </div>
