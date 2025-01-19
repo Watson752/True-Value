@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Heart, Share2, Bell } from "lucide-react";
 
 interface Seller {
   name: string;
@@ -29,7 +31,6 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
     
     return (
       <div className="relative w-full h-8 mt-4">
-        {/* Gradient bar */}
         <div 
           className="absolute w-full h-2 rounded-full"
           style={{
@@ -37,7 +38,6 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
           }}
         />
         
-        {/* Average price line */}
         <div 
           className="absolute w-0.5 h-4 bg-gray-800"
           style={{
@@ -46,7 +46,6 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
           }}
         />
         
-        {/* Price indicator popup */}
         <div 
           className="absolute -top-8 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg border border-gray-200"
           style={{
@@ -64,18 +63,30 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-md bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl"
+      className="w-full max-w-md bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl group"
     >
       <div className="aspect-video relative overflow-hidden">
         <img
           src={imageUrl}
           alt={productName}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute top-4 left-4">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute top-4 left-4 flex items-center gap-2">
           <span className="px-3 py-1 bg-primary text-white text-sm font-medium rounded-full">
             Best Price: ${lowestPrice}
           </span>
+        </div>
+        <div className="absolute bottom-4 right-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <Button size="icon" variant="secondary" className="w-8 h-8 rounded-full">
+            <Heart className="w-4 h-4" />
+          </Button>
+          <Button size="icon" variant="secondary" className="w-8 h-8 rounded-full">
+            <Share2 className="w-4 h-4" />
+          </Button>
+          <Button size="icon" variant="secondary" className="w-8 h-8 rounded-full">
+            <Bell className="w-4 h-4" />
+          </Button>
         </div>
       </div>
       
@@ -89,7 +100,7 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="flex flex-col gap-2 p-3 rounded-lg bg-secondary"
+              className="flex flex-col gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-200"
             >
               <div className="flex items-center justify-between">
                 <div>
