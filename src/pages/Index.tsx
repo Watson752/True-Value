@@ -90,7 +90,7 @@ const Index = () => {
             className="text-center mb-8"
           >
             <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary/60 dark:from-purple-400 dark:via-pink-400 dark:to-purple-500">
-              Smart Price Compare
+              True Value
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 dark:text-gray-300">
               Find the best deals across multiple sellers with real-time price tracking and analysis
