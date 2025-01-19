@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SearchBar } from "@/components/SearchBar";
 import { PriceCard } from "@/components/PriceCard";
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,12 +6,34 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, History, Star } from "lucide-react";
+import { TrendingUp, History, Star, Sun, Moon } from "lucide-react";
 
 const Index = () => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState("trending");
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    // Check if dark mode was previously enabled
+    const isDark = localStorage.getItem("darkMode") === "true";
+    setIsDarkMode(isDark);
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    localStorage.setItem("darkMode", String(newDarkMode));
+    document.documentElement.classList.toggle("dark");
+    
+    toast({
+      title: `${newDarkMode ? "Dark" : "Light"} mode enabled`,
+      duration: 1500,
+    });
+  };
 
   const handleSearch = async (query: string) => {
     // Temporary mock data with expanded information
@@ -44,7 +66,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-purple-900 transition-colors duration-300">
+      <div className="absolute top-4 right-4">
+        <Button
+          variant="outline"
+          size="icon"
+          className="rounded-full"
+          onClick={toggleDarkMode}
+        >
+          {isDarkMode ? (
+            <Sun className="h-5 w-5 text-yellow-500" />
+          ) : (
+            <Moon className="h-5 w-5 text-slate-700" />
+          )}
+        </Button>
+      </div>
+
       <Card className="container mx-auto px-4 py-8 border-none shadow-none bg-transparent">
         <CardContent className="p-0">
           <motion.div
@@ -52,10 +89,10 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-8"
           >
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary/60">
+            <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary/60 dark:from-purple-400 dark:via-pink-400 dark:to-purple-500">
               Smart Price Compare
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 dark:text-gray-300">
               Find the best deals across multiple sellers with real-time price tracking and analysis
             </p>
             <div className="mb-12 max-w-2xl mx-auto">
@@ -103,14 +140,14 @@ const Index = () => {
                 </TabsContent>
 
                 <TabsContent value="recent" className="mt-8">
-                  <div className="text-center text-muted-foreground">
+                  <div className="text-center text-muted-foreground dark:text-gray-400">
                     <p>Your recent searches will appear here</p>
                     <Button variant="outline" className="mt-4">View History</Button>
                   </div>
                 </TabsContent>
 
                 <TabsContent value="favorites" className="mt-8">
-                  <div className="text-center text-muted-foreground">
+                  <div className="text-center text-muted-foreground dark:text-gray-400">
                     <p>Your favorite items will appear here</p>
                     <Button variant="outline" className="mt-4">Browse Favorites</Button>
                   </div>
