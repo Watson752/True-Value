@@ -17,7 +17,7 @@ export const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) =
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto p-3 shadow-lg border border-input/50 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 dark:bg-gray-800/90 dark:border-gray-700">
+    <Card className="w-full max-w-2xl mx-auto p-3 shadow-md border border-camel-blue/20 bg-white dark:bg-camel-darkCharcoal dark:border-camel-blue/30">
       <form onSubmit={handleSubmit} className="relative flex items-center gap-2">
         <div className="relative flex-1">
           <Input
@@ -25,7 +25,7 @@ export const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) =
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for a product..."
-            className="w-full h-12 pl-4 pr-12 text-lg bg-transparent border-none focus-visible:ring-1 focus-visible:ring-primary/30 dark:text-gray-100 dark:placeholder:text-gray-400"
+            className="w-full h-12 pl-4 pr-12 text-lg bg-transparent border-none focus-visible:ring-1 focus-visible:ring-camel-blue dark:text-white dark:placeholder:text-camel-lightGray"
           />
           <motion.div
             className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2"
@@ -36,7 +36,7 @@ export const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) =
               type="button"
               size="icon"
               variant="ghost"
-              className="w-8 h-8 text-muted-foreground hover:text-primary dark:text-gray-400 dark:hover:text-gray-200"
+              className="w-8 h-8 text-camel-lightGray hover:text-camel-blue dark:text-camel-lightGray dark:hover:text-white"
               onClick={() => setIsListening(!isListening)}
             >
               <Mic className="w-4 h-4" />
@@ -45,7 +45,7 @@ export const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) =
               type="button"
               size="icon"
               variant="ghost"
-              className="w-8 h-8 text-muted-foreground hover:text-primary dark:text-gray-400 dark:hover:text-gray-200"
+              className="w-8 h-8 text-camel-lightGray hover:text-camel-blue dark:text-camel-lightGray dark:hover:text-white"
             >
               <Camera className="w-4 h-4" />
             </Button>
@@ -54,7 +54,7 @@ export const SearchBar = ({ onSearch }: { onSearch: (query: string) => void }) =
         <Button
           type="submit"
           size="icon"
-          className="w-12 h-12 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full dark:bg-primary/80 dark:hover:bg-primary"
+          className="w-12 h-12 bg-camel-blue hover:bg-camel-lightBlue text-white rounded-md dark:bg-camel-blue/90 dark:hover:bg-camel-blue"
         >
           <Search className="w-5 h-5" />
         </Button>
