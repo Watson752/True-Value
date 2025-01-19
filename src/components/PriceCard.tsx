@@ -39,7 +39,7 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
         />
         
         <div 
-          className="absolute w-0.5 h-4 bg-gray-800"
+          className="absolute w-0.5 h-4 bg-gray-800 dark:bg-gray-200"
           style={{
             left: `${getPricePosition(averagePrice)}%`,
             transform: 'translateX(-50%)',
@@ -47,13 +47,13 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
         />
         
         <div 
-          className="absolute -top-8 transform -translate-x-1/2 bg-white px-2 py-1 rounded shadow-lg border border-gray-200"
+          className="absolute -top-8 transform -translate-x-1/2 bg-white dark:bg-gray-800 px-2 py-1 rounded shadow-lg border border-gray-200 dark:border-gray-700"
           style={{
             left: `${position}%`,
           }}
         >
-          <span className="font-medium">${price.toFixed(2)}</span>
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white border-r border-b border-gray-200"></div>
+          <span className="font-medium dark:text-white">${price.toFixed(2)}</span>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white dark:bg-gray-800 border-r border-b border-gray-200 dark:border-gray-700"></div>
         </div>
       </div>
     );
@@ -63,7 +63,7 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-md bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl group"
+      className="w-full max-w-md bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl group"
     >
       <div className="aspect-video relative overflow-hidden">
         <img
@@ -91,7 +91,7 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
       </div>
       
       <div className="p-6">
-        <h3 className="text-xl font-display font-semibold mb-4">{productName}</h3>
+        <h3 className="text-xl font-display font-semibold mb-4 dark:text-white">{productName}</h3>
         
         <div className="space-y-4">
           {sellers.map((seller, index) => (
@@ -100,11 +100,11 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="flex flex-col gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors duration-200"
+              className="flex flex-col gap-2 p-3 rounded-lg bg-secondary dark:bg-gray-700/50 hover:bg-secondary/80 dark:hover:bg-gray-700/70 transition-colors duration-200"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">{seller.name}</p>
+                  <p className="font-medium dark:text-white">{seller.name}</p>
                   <div className="flex items-center mt-1">
                     {Array.from({ length: seller.rating }).map((_, i) => (
                       <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
@@ -114,12 +114,12 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-lg font-semibold">${seller.price}</p>
+                  <p className="text-lg font-semibold dark:text-white">${seller.price}</p>
                   <a
                     href={seller.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
+                    className="text-sm text-primary hover:underline dark:text-primary-foreground"
                   >
                     Visit Store
                   </a>
