@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Heart, Share2, Bell } from "lucide-react";
+import { Heart, Share2, Bell, LineChart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Seller {
   name: string;
@@ -13,9 +14,10 @@ interface PriceCardProps {
   sellers: Seller[];
   productName: string;
   imageUrl: string;
+  id?: string; // Added id prop
 }
 
-export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) => {
+export const PriceCard = ({ sellers, productName, imageUrl, id = "1" }: PriceCardProps) => {
   const lowestPrice = Math.min(...sellers.map(s => s.price));
   const highestPrice = Math.max(...sellers.map(s => s.price));
   const averagePrice = sellers.reduce((acc, s) => acc + s.price, 0) / sellers.length;
@@ -87,6 +89,11 @@ export const PriceCard = ({ sellers, productName, imageUrl }: PriceCardProps) =>
           <Button size="icon" variant="secondary" className="w-8 h-8 rounded-full">
             <Bell className="w-4 h-4" />
           </Button>
+          <Link to={`/price-history/${id}`}>
+            <Button size="icon" variant="secondary" className="w-8 h-8 rounded-full">
+              <LineChart className="w-4 h-4" />
+            </Button>
+          </Link>
         </div>
       </div>
       
